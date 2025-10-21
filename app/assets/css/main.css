@@ -3,4 +3,10 @@
 
 body {
   background-color: rgb(250, 248, 246);
+  margin: 0;
+  padding: 0;
+
+}
+html {
+  color-scheme: light;
 }
