@@ -4,7 +4,7 @@
       <slot> <h1>Dicas</h1></slot>
     </ButtonCard>
     <div class="col-span-3 flex flex-col">
-      <div class="cyber-banner w-full">PONTOS DE EVENTO</div>
+      <div class="cyber-banner cyber-glitch-1 w-full">PONTOS DE EVENTO</div>
       <NormalCard class="mt-5 flex-1 flex flex-col justify-center">
         <template #content>
           <div class="flex p-2 border-2 text-white bg-black justify-between items-center">
@@ -26,7 +26,9 @@
         </template>
       </NormalCard>
     </div>
-    <div class="cyber-banner w-full bg-purple mt-5 fg-white col-span-5">DESAFIOS</div>
+    <div class="cyber-banner cyber-glitch-1 w-full bg-purple mt-5 fg-white col-span-5">
+      DESAFIOS
+    </div>
     <Table class="col-span-5 w-full"></Table>
   </div>
 </template>
