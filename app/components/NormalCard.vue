@@ -1,6 +1,7 @@
 <template>
-  <div class="cyber-tile-big cyber-razor-top bg-gray-700">
-    <slot name="title"> </slot>
+  <div class="cyber-tile-big shadow-2xl bg-white">
     <slot name="content"></slot>
+
+    <slot name="title"> </slot>
   </div>
 </template>

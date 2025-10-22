@@ -1,14 +1,9 @@
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss";
 @import "tailwindcss-primeui";
 
 body {
   background-color: rgb(250, 248, 246);
   font-family: "Cyber", sans-serif;
-}
-* {
-  margin: 0;
 }
 
 @font-face {

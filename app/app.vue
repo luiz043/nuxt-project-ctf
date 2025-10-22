@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-200 h-dvh p-3">
+  <div class="bg-slate-200 h-dvh p-5">
     <NuxtPage />
   </div>
 </template>
