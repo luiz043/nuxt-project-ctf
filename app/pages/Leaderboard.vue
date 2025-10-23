@@ -1,40 +1,54 @@
 <template>
   <div class="grid grid-cols-3 gap-2">
+    <div class="cyber-banner cyber-glitch-1 w-full bg-purple mt-2 fg-white col-span-3">
+      LEADERBOARD
+    </div>
+
     <div class="cyber-tile-big col-span-3 bg-white">
       <HorizontalBarChart
         :datasets="datasets"
         :labels="['Pontuação']"
-        title="LeaderBoard" />
+        title="" />
     </div>
 
-    <div class="cyber-banner cyber-glitch-1 w-full col-span-3">TABELA DE PONTUAÇÃO</div>
-    <Card
-      v-for="(teams, index) in teams.sort((a, b) => b.score - a.score)"
-      class="col-span-3 w-full">
-      <template #content>
-        <div class="flex text-3xl justify-between">
-          <span>
-            {{ index }} >
-            {{ teams.name }}
-            <div class="text-xl text-gray-700">
-              {{ teams.players.join(", ") }}
-            </div>
-          </span>
-          <span class="text-4xl"
-            >{{ teams.score }}
-            <span class="text-gray-600 text-3xl">pontos</span>
-          </span>
-        </div>
-      </template>
-    </Card>
+    <div class="cyber-banner cyber-glitch-1 w-full mt-5 col-span-3">TABELA DE PONTUAÇÃO</div>
+
+    <div class="col-span-3 grid grid-cols-2 gap-2">
+      <Card
+        v-for="(team, index) in teams.sort((a, b) => b.score - a.score)"
+        :key="team._id || index"
+        class="col-span-1 w-full">
+        <template #content>
+          <div class="flex text-3xl justify-between items-center">
+            <span>
+              {{ index + 1 }} › {{ team.name }}
+              <div class="text-2xl text-gray-700">
+                {{ team.players.join(", ") }}
+              </div>
+            </span>
+            <span class="text-4xl text-nowrap">
+              {{ team.score }}
+              <span class="text-gray-600 text-3xl"> pontos</span>
+            </span>
+          </div>
+        </template>
+      </Card>
+    </div>
   </div>
 </template>
+
 <script setup lang="ts">
 const teams = [
   {
     "_id": "68f909c8619618597434a3f4",
     "name": "Pythonidae",
-    "players": ["Luis", "Quirico III"],
+    "players": [
+      "Luis henrique",
+      "Quirico IIIfffffffff",
+      "helena pires veltri",
+      "Vargas getulio bom dia",
+      "Luis",
+    ],
     "score": 526,
     "domain": "localhost",
     "challenges": [2, 1],
