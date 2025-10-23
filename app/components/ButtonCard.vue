@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div class="cyber-tile-big bg-white">
-      <img src="../assets/img/cyberpunk-2077-1080p-gaming-nxgxdqn7djd7ukct.webp" />
+    <div class="cyber-tile-big h-full bg-white">
+      <!-- <img src="../assets/img/cyberpunk-2077-1080p-gaming-nxgxdqn7djd7ukct.webp" /> -->
       <h2 class="cyber-h">
         <slot></slot>
       </h2>
 
       <ul class="mt-2 text-3xl list-disc list-inside marker:text-black pl-4">
+        Nenhuma dica liberada
         <li
           v-for="(item, index) in items"
           :key="index"
@@ -16,13 +17,13 @@
       </ul>
     </div>
 
-    <button
+    <!-- <button
       @click="addItem"
       class="w-full cyber-glitch-2 cyber-button bg-red fg-white">
       Nova dica
       <span class="glitchtext">nova Dica</span>
       <span class="tag">R25</span>
-    </button>
+    </button> -->
   </div>
 </template>
 

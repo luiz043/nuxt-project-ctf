@@ -5,12 +5,7 @@
     <Column
       field="id"
       header="ID"></Column>
-    <Column
-      field="name"
-      header="Name"></Column>
-    <Column
-      field="email"
-      header="email"></Column>
+
     <Column
       field="age"
       header="Idade"></Column>

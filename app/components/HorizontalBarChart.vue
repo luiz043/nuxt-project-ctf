@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
   showLegend: true,
   showGrid: true,
   animate: true,
-  indexAxis: "x", // Padrão horizontal
+  indexAxis: "y", // Padrão horizontal
 });
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
@@ -57,13 +57,13 @@ const createChart = () => {
 
   // Cores padrão caso não sejam fornecidas
   const defaultColors = [
-    "#3b82f6", // blue-500
-    "#10b981", // green-500
-    "#f59e0b", // amber-500
-    "#ef4444", // red-500
-    "#8b5cf6", // violet-500
-    "#ec4899", // pink-500
-    "#14b8a6", // teal-500
+    "#222021",
+    "#00512a",
+    "#3a0760",
+    "#017267",
+    "#bbaf05",
+    "#85010f",
+    "#bbaf05",
   ];
 
   // Prepara os datasets com cores padrão se necessário
@@ -72,11 +72,11 @@ const createChart = () => {
     backgroundColor: dataset.backgroundColor || defaultColors[index % defaultColors.length],
 
     borderColor: dataset.borderColor || defaultColors[index % defaultColors.length],
-    borderWidth: dataset.borderWidth || 2,
+    borderWidth: dataset.borderWidth || 3,
   }));
 
   chartInstance = new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
       labels: props.labels,
       datasets: preparedDatasets,
@@ -94,12 +94,13 @@ const createChart = () => {
       },
       plugins: {
         legend: {
-          display: props.showLegend,
+          display: false,
           position: "top",
           labels: {
-            padding: 15,
+            padding: 10,
             font: {
-              size: 14,
+              size: 18,
+              family: "Cyber",
             },
           },
         },
@@ -107,12 +108,13 @@ const createChart = () => {
           display: !!props.title,
           text: props.title || "",
           font: {
-            size: 24,
+            size: 34,
             weight: "normal",
+            family: "Cyber",
           },
           padding: {
             top: 10,
-            bottom: 20,
+            bottom: 10,
           },
         },
         tooltip: {
@@ -138,7 +140,8 @@ const createChart = () => {
           },
           ticks: {
             font: {
-              size: 11,
+              size: 18,
+              family: "Cyber",
             },
           },
         },
@@ -148,7 +151,8 @@ const createChart = () => {
           },
           ticks: {
             font: {
-              size: 11,
+              size: 16,
+              family: "Cyber",
             },
           },
         },
