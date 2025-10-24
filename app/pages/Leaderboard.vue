@@ -1,55 +1,45 @@
 <template>
-  <div class="grid grid-cols-3 gap-2">
-    <div class="cyber-banner cyber-glitch-1 w-full bg-purple mt-2 fg-white col-span-3">
-      LEADERBOARD
-    </div>
-
+  <div class="grid grid-cols-3 gap-3">
     <div class="cyber-tile-big col-span-3 bg-white">
       <HorizontalBarChart
         :datasets="datasets"
-        :labels="['Pontuação']"
-        title="" />
+        :labels="labels"
+        title="LeaderBoard" />
     </div>
 
-    <div class="cyber-banner cyber-glitch-1 w-full mt-5 col-span-3">TABELA DE PONTUAÇÃO</div>
-
-    <div class="col-span-3 grid grid-cols-2 gap-2">
-      <Card
-        v-for="(team, index) in teams.sort((a, b) => b.score - a.score)"
-        :key="team._id || index"
-        class="col-span-1 w-full">
-        <template #content>
-          <div class="flex text-3xl justify-between items-center">
-            <span>
-              {{ index + 1 }} › {{ team.name }}
-              <div class="text-2xl text-gray-700">
-                {{ team.players.join(", ") }}
-              </div>
-            </span>
-            <span class="text-4xl text-nowrap">
-              {{ team.score }}
-              <span class="text-gray-600 text-3xl"> pontos</span>
-            </span>
-          </div>
-        </template>
-      </Card>
-    </div>
+    <div class="cyber-banner cyber-glitch-1 w-full mt-3 col-span-3">TABELA DE PONTUAÇÃO</div>
+    <Card
+      v-for="(team, index) in sortedTeams"
+      :key="team._id"
+      class="col-span-3 w-full">
+      <template #content>
+        <div class="flex text-3xl justify-between">
+          <span :style="{ color: generateTeamColor(index) }">
+            {{ index + 1 }} >
+            {{ team.name }}
+            <div class="text-xl text-gray-700">
+              {{ team.players.join(", ") }}
+            </div>
+          </span>
+          <span>
+            {{ getTotalScore(team) }}
+            <span class="text-gray-600">pontos</span>
+          </span>
+        </div>
+      </template>
+    </Card>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 const teams = [
   {
     "_id": "68f909c8619618597434a3f4",
     "name": "Pythonidae",
-    "players": [
-      "Luis henrique",
-      "Quirico IIIfffffffff",
-      "helena pires veltri",
-      "Vargas getulio bom dia",
-      "Luis",
-    ],
-    "score": 526,
+    "players": ["Luis", "Quirico III"],
+    "score": [0, 150, 100, 150],
     "domain": "localhost",
     "challenges": [2, 1],
     "__v": 6,
@@ -58,7 +48,7 @@ const teams = [
     "_id": "68f909ce619618597434a3f6",
     "name": "Javali Script",
     "players": ["Helena", "Quirico"],
-    "score": 196,
+    "score": [0, 200, 250, 400],
     "domain": "google",
     "challenges": [],
     "__v": 2,
@@ -67,7 +57,7 @@ const teams = [
     "_id": "68f909e3619618597434a3f8",
     "name": "Insetos do Front",
     "players": ["Luiz", "Quirico II"],
-    "score": 125,
+    "score": [0, 50, 150, 300],
     "domain": "facebook",
     "challenges": [],
     "__v": 0,
@@ -76,25 +66,7 @@ const teams = [
     "_id": "68f909f5619618597434a3fa",
     "name": "C++AVALO",
     "players": ["Marcos", "Quirico VII"],
-    "score": 52,
-    "domain": "bigriver",
-    "challenges": [],
-    "__v": 0,
-  },
-  {
-    "_id": "68f909f5619618577434a3fa",
-    "name": "C++A346346VALO",
-    "players": ["Marcos", "Quirico VII"],
-    "score": 252,
-    "domain": "bigriver",
-    "challenges": [],
-    "__v": 0,
-  },
-  {
-    "_id": "68f909f5719618597434a3fa",
-    "name": "C++ffaeAVALO",
-    "players": ["Marcos", "Quirico VII"],
-    "score": 122,
+    "score": [0, 100, 200, 350],
     "domain": "bigriver",
     "challenges": [],
     "__v": 0,
@@ -103,31 +75,60 @@ const teams = [
 
 const generateTeamColor = (index: number) => {
   const colors = [
-    "#007BFF", // blue
-    "#28A745", // amber
-    "#FFC107", // emerald
-    "#DC3545", // violet
-    "#E83E8C", // red
-    "#17A2B8", // teal
-    "#6F42C1", // orange
-    "#6366f1", // indigo
+    "#1a82f6",
+    "#f59e0b",
+    "#10b981",
+    "#8b5cf6",
+    "#ef4444",
+    "#14b8a6",
+    "#f97316",
+    "#6366f1",
   ];
   return colors[index % colors.length];
 };
 
+const getTotalScore = (team: any) => {
+  return team.score.reduce((acc, cur) => {
+    acc += cur;
+    return acc;
+  });
+};
+
+const getRunningScores = (team: any) => {
+  let runningTotal = 0;
+  return team.score.map((score: number) => {
+    runningTotal += score;
+    return runningTotal;
+  });
+};
+
 const sortedTeams = computed(() => {
-  return [...teams].sort((a, b) => b.score - a.score);
+  return [...teams].sort((a, b) => getTotalScore(b) - getTotalScore(a));
+});
+
+const labels = computed(() => {
+  let i;
+  let arr = [];
+
+  for (let i = 0; i <= 8; i++) {
+    arr.push(i.toString());
+  }
+
+  return arr;
 });
 
 const datasets = computed(() => {
-  return sortedTeams.value.map((team, index) => ({
-    label: team.name,
-    data: [team.score],
-    backgroundColor: generateTeamColor(index),
-    borderColor: generateTeamColor(index),
-    borderWidth: 2,
-  }));
+  return teams.map((team, index) => {
+    return {
+      label: team.name,
+      data: getRunningScores(team),
+      backgroundColor: generateTeamColor(index),
+      borderColor: generateTeamColor(index),
+      borderWidth: 3,
+      tension: 0,
+      spanGaps: false,
+      pointRadius: 13,
+    };
+  });
 });
 </script>
-
-<style></style>

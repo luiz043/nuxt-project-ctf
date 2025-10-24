@@ -9,8 +9,9 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, onBeforeUnmount } from "vue";
 import { Chart, registerables } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-Chart.register(...registerables);
+Chart.register(...registerables, ChartDataLabels);
 
 // Props do componente
 interface Props {
@@ -22,6 +23,7 @@ interface Props {
     borderColor?: string | string[];
     borderWidth?: number;
   }[];
+  pointRadius?: number;
 
   height?: string;
   showLegend?: boolean;
@@ -38,7 +40,8 @@ const props = withDefaults(defineProps<Props>(), {
   showLegend: true,
   showGrid: true,
   animate: true,
-  indexAxis: "y", // Padrão horizontal
+
+  indexAxis: "x", // Padrão horizontal
 });
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
@@ -76,7 +79,7 @@ const createChart = () => {
   }));
 
   chartInstance = new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
       labels: props.labels,
       datasets: preparedDatasets,
@@ -84,7 +87,10 @@ const createChart = () => {
 
     options: {
       elements: {
-        line: {},
+        point: {
+          radius: props.pointRadius,
+          hoverRadius: 15,
+        },
       },
       indexAxis: props.indexAxis,
       responsive: true,
@@ -93,6 +99,16 @@ const createChart = () => {
         duration: props.animate ? 750 : 0,
       },
       plugins: {
+        datalabels: {
+          align: "center",
+          anchor: "center",
+          color: "white",
+          font: {
+            size: 16,
+            family: "Cyber",
+          },
+          formatter: (value: number) => value || "",
+        },
         legend: {
           display: false,
           position: "top",
