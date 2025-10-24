@@ -5,13 +5,13 @@
     </ButtonCard> -->
     <div class="col-span-5 flex flex-col">
       <div class="cyber-banner cyber-glitch-1 w-full">PONTOS DE EVENTO</div>
-      <NormalCard class="mt-5 flex items-center justify-around">
+      <NormalCard class="mt-5 flex flex-wrap items-center justify-around">
         <template #content>
           <div>
             <div
-              class="flex p-2 border-2 w-7xl mt-3 text-white bg-black justify-between items-center">
+              class="flex p-2 border-2 2xl:w-7xl sm:w-4xl mt-3 text-white bg-black justify-between items-center">
               <div class="text-4xl">
-                Blood Points
+                First Blood Points
                 <span class="animate-code">_</span>
               </div>
 
@@ -22,7 +22,7 @@
             </div>
           </div>
           <div>
-            <div class="flex border-2 w-7xl p-2 mt-3 justify-between items-center">
+            <div class="flex border-2 sm:w-4xl 2xl:w-7xl p-2 mt-3 justify-between items-center">
               <span class="text-4xl"> Start Points </span>
               <span class="text-4xl"> +50 Pontos</span>
             </div>
@@ -57,20 +57,20 @@
 <script setup>
 const challenges = [
   {
-    "advanced": false,
-    "_id": "68f91a2959176fb01488a6a0",
-    "name": "Password no HTML",
-    "score_base": 15,
-    "code": 1,
-    "__v": 0,
+    advanced: false,
+    _id: "68f91a2959176fb01488a6a0",
+    name: "Password no HTML",
+    score_base: 15,
+    code: 1,
+    __v: 0,
   },
   {
-    "_id": "68f928492ac95c950dd625aa",
-    "name": "Desativar disable",
-    "score_base": 40,
-    "code": 2,
-    "advanced": true,
-    "__v": 0,
+    _id: "68f928492ac95c950dd625aa",
+    name: "Desativar disable",
+    score_base: 40,
+    code: 2,
+    advanced: true,
+    __v: 0,
   },
 ];
 </script>

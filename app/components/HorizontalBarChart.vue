@@ -36,7 +36,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  height: "500px",
+  height: "450px",
   showLegend: true,
   showGrid: true,
   animate: true,
@@ -89,7 +89,7 @@ const createChart = () => {
       elements: {
         point: {
           radius: props.pointRadius,
-          hoverRadius: 15,
+          hoverRadius: 20,
         },
       },
       indexAxis: props.indexAxis,

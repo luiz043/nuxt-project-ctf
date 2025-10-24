@@ -8,26 +8,30 @@
     </div>
 
     <div class="cyber-banner cyber-glitch-1 w-full mt-3 col-span-3">TABELA DE PONTUAÇÃO</div>
-    <Card
-      v-for="(team, index) in sortedTeams"
-      :key="team._id"
-      class="col-span-3 w-full">
-      <template #content>
-        <div class="flex text-3xl justify-between">
-          <span :style="{ color: generateTeamColor(index) }">
-            {{ index + 1 }} >
-            {{ team.name }}
-            <div class="text-xl text-gray-700">
-              {{ team.players.join(", ") }}
+    <div class="col-span-3">
+      <div class="grid grid-cols-3 gap-3">
+        <Card
+          v-for="(team, index) in sortedTeams"
+          :key="team._id"
+          class="col-span-1 w-full">
+          <template #content>
+            <div class="flex text-3xl justify-between">
+              <span :style="{ color: generateTeamColor(index) }">
+                {{ index + 1 }}.
+                {{ team.name }}
+                <div class="text-xl text-gray-700">
+                  {{ team.players.join(", ") }}
+                </div>
+              </span>
+              <span class="text-nowrap">
+                {{ getTotalScore(team) }}
+                <span class="text-gray-600">pontos</span>
+              </span>
             </div>
-          </span>
-          <span>
-            {{ getTotalScore(team) }}
-            <span class="text-gray-600">pontos</span>
-          </span>
-        </div>
-      </template>
-    </Card>
+          </template>
+        </Card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,40 +40,103 @@ import { computed } from "vue";
 
 const teams = [
   {
-    "_id": "68f909c8619618597434a3f4",
-    "name": "Pythonidae",
-    "players": ["Luis", "Quirico III"],
-    "score": [0, 50, 150, 200, 250],
-    "domain": "localhost",
-    "challenges": [2, 1],
-    "__v": 6,
+    _id: "68f909c8619618597434a3f4",
+    name: "Pythonidae",
+    players: ["Luis", "Quirico III", "Quirico III", "Quirico III", "Quirico III"],
+    score: [0, 50, 150, 200, 250],
+    domain: "localhost",
+    challenges: [2, 1],
+    __v: 6,
   },
   {
-    "_id": "68f909ce619618597434a3f6",
-    "name": "Javali Script",
-    "players": ["Helena", "Quirico"],
-    "score": [0, 100, 150, 300, 350],
-    "domain": "google",
-    "challenges": [],
-    "__v": 2,
+    _id: "68f909c8619618597434a3f4",
+    name: "Pythonidae",
+    players: ["Luis", "Quirico III", "Quirico III", "Quirico III", "Quirico III"],
+    score: [0, 50, 150, 200, 250],
+    domain: "localhost",
+    challenges: [2, 1],
+    __v: 6,
   },
   {
-    "_id": "68f909e3619618597434a3f8",
-    "name": "Insetos do Front",
-    "players": ["Luiz", "Quirico II"],
-    "score": [0, 50, 150, 300],
-    "domain": "facebook",
-    "challenges": [],
-    "__v": 0,
+    _id: "68f909c8619618597434a3f4",
+    name: "Pythonidae",
+    players: ["Luis", "Quirico III", "Quirico III", "Quirico III", "Quirico III"],
+    score: [0, 50, 150, 200, 250],
+    domain: "localhost",
+    challenges: [2, 1],
+    __v: 6,
   },
   {
-    "_id": "68f909f5619618597434a3fa",
-    "name": "C++AVALO",
-    "players": ["Marcos", "Quirico VII"],
-    "score": [0, 100, 200, 350],
-    "domain": "bigriver",
-    "challenges": [],
-    "__v": 0,
+    _id: "68f909ce619618597434a3f6",
+    name: "Javali Script",
+    players: ["Helena", "Quirico"],
+    score: [0, 100, 150, 300, 350],
+    domain: "google",
+    challenges: [],
+    __v: 2,
+  },
+  {
+    _id: "68f909e3619618597434a3f8",
+    name: "Insetos do Front",
+    players: ["Luiz", "Quirico II"],
+    score: [0, 50, 150, 300],
+    domain: "facebook",
+    challenges: [],
+    __v: 0,
+  },
+  {
+    _id: "68f909f5619618597434a3fa",
+    name: "C++AVALO",
+    players: ["Marcos", "Quirico VII"],
+    score: [0, 100, 200, 350],
+    domain: "bigriver",
+    challenges: [],
+    __v: 0,
+  },
+  {
+    _id: "68f909f5619618597434a3fa",
+    name: "C++afaeAVALO",
+    players: ["Marcos", "Quirico VII"],
+    score: [0, 100, 200, 350],
+    domain: "bigriver",
+    challenges: [],
+    __v: 0,
+  },
+  {
+    _id: "68f909f5619618597434a3fa",
+    name: "C++AfaefVALO",
+    players: ["Marcos", "Quirico VII"],
+    score: [0, 100, 200, 350],
+    domain: "bigriver",
+    challenges: [],
+    __v: 0,
+  },
+  {
+    _id: "68f909f5619618597434a3fa",
+    name: "C++AfaefVALO",
+    players: ["Marcos", "Quirico VII"],
+    score: [0, 100, 200, 350],
+    domain: "bigriver",
+    challenges: [],
+    __v: 0,
+  },
+  {
+    _id: "68f909f5619618597434a3fa",
+    name: "C++AfaefVALO",
+    players: ["Marcos", "Quirico VII"],
+    score: [0, 100, 200, 350],
+    domain: "bigriver",
+    challenges: [],
+    __v: 0,
+  },
+  {
+    _id: "68f909f5619618597434a3fa",
+    name: "C++AfaefVALO",
+    players: ["Marcos", "Quirico VII"],
+    score: [0, 100, 200, 350],
+    domain: "bigriver",
+    challenges: [],
+    __v: 0,
   },
 ];
 
@@ -118,7 +185,7 @@ const datasets = computed(() => {
       borderWidth: 3,
       tension: 0,
       spanGaps: false,
-      pointRadius: 15,
+      pointRadius: 18,
     };
   });
 });

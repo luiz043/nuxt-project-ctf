@@ -4,6 +4,17 @@ import Material from "@primeuix/themes/material";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  app: {
+    pageTransition: {
+      name: 'fade',
+      mode: 'out-in', // default
+    },
+    layoutTransition: {
+      name: 'slide',
+      mode: 'out-in', // default
+    },
+  },
+
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["~/assets/css/main.css", "~/assets/css/cyberpunk.css"],
