@@ -17,13 +17,13 @@
       </ul>
     </div>
 
-    <!-- <button
+    <button
       @click="addItem"
       class="w-full cyber-glitch-2 cyber-button bg-red fg-white">
       Nova dica
-      <span class="glitchtext">nova Dica</span>
+      <span class="glitchtext">LUIS3 GAY</span>
       <span class="tag">R25</span>
-    </button> -->
+    </button>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-5 gap-2">
-    <!-- <ButtonCard class="col-span-2">
+    <!-- <ButtonCard class="col-span-5 mb-15">
       <slot> <h1>Dicas</h1></slot>
     </ButtonCard> -->
     <div class="col-span-5 flex flex-col">
@@ -17,7 +17,7 @@
 
               <span class="text-4xl"> +100 Pontos</span>
             </div>
-            <div class="text-xl text-gray-600">
+            <div class="text-2xl text-gray-600">
               Ganha ao ser a primeira equipe a finalizar um desafio avançado
             </div>
           </div>
@@ -26,7 +26,7 @@
               <span class="text-4xl"> Start Points </span>
               <span class="text-4xl"> +50 Pontos</span>
             </div>
-            <div class="text-xl text-gray-600">
+            <div class="text-2xl text-gray-600">
               Ganha ao ser a primeira equipe a finalizar um desafio geral
             </div>
           </div>
