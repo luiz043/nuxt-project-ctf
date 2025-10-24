@@ -15,7 +15,7 @@ Chart.register(...registerables, ChartDataLabels);
 
 // Props do componente
 interface Props {
-  labels: string[];
+  labels?: string[];
   datasets: {
     label: string;
     data: number[];
@@ -36,7 +36,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  height: "400px",
+  height: "500px",
   showLegend: true,
   showGrid: true,
   animate: true,
@@ -96,7 +96,7 @@ const createChart = () => {
       responsive: true,
       maintainAspectRatio: false,
       animation: {
-        duration: props.animate ? 750 : 0,
+        duration: 750,
       },
       plugins: {
         datalabels: {
@@ -104,7 +104,7 @@ const createChart = () => {
           anchor: "center",
           color: "white",
           font: {
-            size: 16,
+            size: 18,
             family: "Cyber",
           },
           formatter: (value: number) => value || "",
@@ -147,8 +147,10 @@ const createChart = () => {
       },
       scales: {
         x: {
+          // type: "linear",
+          display: false,
           beginAtZero: true,
-          min: props.minValue,
+          min: 0,
           max: props.maxValue,
           grid: {
             display: props.showGrid,
@@ -163,7 +165,7 @@ const createChart = () => {
         },
         y: {
           grid: {
-            display: false,
+            display: true,
           },
           ticks: {
             font: {

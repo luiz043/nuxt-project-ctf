@@ -39,7 +39,7 @@ const teams = [
     "_id": "68f909c8619618597434a3f4",
     "name": "Pythonidae",
     "players": ["Luis", "Quirico III"],
-    "score": [0, 150, 100, 150],
+    "score": [0, 50, 150, 200, 250],
     "domain": "localhost",
     "challenges": [2, 1],
     "__v": 6,
@@ -48,7 +48,7 @@ const teams = [
     "_id": "68f909ce619618597434a3f6",
     "name": "Javali Script",
     "players": ["Helena", "Quirico"],
-    "score": [0, 200, 250, 400],
+    "score": [0, 100, 150, 300, 350],
     "domain": "google",
     "challenges": [],
     "__v": 2,
@@ -106,16 +106,7 @@ const sortedTeams = computed(() => {
   return [...teams].sort((a, b) => getTotalScore(b) - getTotalScore(a));
 });
 
-const labels = computed(() => {
-  let i;
-  let arr = [];
-
-  for (let i = 0; i <= 8; i++) {
-    arr.push(i.toString());
-  }
-
-  return arr;
-});
+const labels = computed(() => Array.from({ length: 10 }, (_, i) => (i * 100).toString()));
 
 const datasets = computed(() => {
   return teams.map((team, index) => {
@@ -127,7 +118,7 @@ const datasets = computed(() => {
       borderWidth: 3,
       tension: 0,
       spanGaps: false,
-      pointRadius: 13,
+      pointRadius: 15,
     };
   });
 });
