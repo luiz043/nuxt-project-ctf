@@ -1,18 +1,17 @@
 <template>
   <div class="grid grid-cols-3 gap-3">
     <div class="cyber-tile-big col-span-3 bg-white">
-      <HorizontalBarChart
+      <LineChart
         :datasets="datasets"
         :labels="labels"
         title="LeaderBoard" />
     </div>
 
-    <div class="cyber-banner cyber-glitch-1 w-full mt-3 col-span-3">TABELA DE PONTUAÇÃO</div>
+    <div class="cyber-banner cyber-glitch-1 w-full col-span-3">TABELA DE PONTUAÇÃO</div>
     <div class="col-span-3">
       <div class="grid grid-cols-3 gap-3">
         <Card
-          v-for="(team, index) in sortedTeams"
-          :key="team._id"
+          v-for="(team, index) in teamsData.data"
           class="col-span-1 w-full">
           <template #content>
             <div class="flex text-3xl justify-between">
@@ -36,109 +35,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+const { $socket } = useNuxtApp();
 
-const teams = [
-  {
-    _id: "68f909c8619618597434a3f4",
-    name: "Pythonidae",
-    players: ["Luis", "Quirico III", "Quirico III", "Quirico III", "Quirico III"],
-    score: [0, 50, 150, 200, 250],
-    domain: "localhost",
-    challenges: [2, 1],
-    __v: 6,
-  },
-  {
-    _id: "68f909c8619618597434a3f4",
-    name: "Pythonidae",
-    players: ["Luis", "Quirico III", "Quirico III", "Quirico III", "Quirico III"],
-    score: [0, 50, 150, 200, 250],
-    domain: "localhost",
-    challenges: [2, 1],
-    __v: 6,
-  },
-  {
-    _id: "68f909c8619618597434a3f4",
-    name: "Pythonidae",
-    players: ["Luis", "Quirico III", "Quirico III", "Quirico III", "Quirico III"],
-    score: [0, 50, 150, 200, 250],
-    domain: "localhost",
-    challenges: [2, 1],
-    __v: 6,
-  },
-  {
-    _id: "68f909ce619618597434a3f6",
-    name: "Javali Script",
-    players: ["Helena", "Quirico"],
-    score: [0, 100, 150, 300, 350],
-    domain: "google",
-    challenges: [],
-    __v: 2,
-  },
-  {
-    _id: "68f909e3619618597434a3f8",
-    name: "Insetos do Front",
-    players: ["Luiz", "Quirico II"],
-    score: [0, 50, 150, 300],
-    domain: "facebook",
-    challenges: [],
-    __v: 0,
-  },
-  {
-    _id: "68f909f5619618597434a3fa",
-    name: "C++AVALO",
-    players: ["Marcos", "Quirico VII"],
-    score: [0, 100, 200, 350],
-    domain: "bigriver",
-    challenges: [],
-    __v: 0,
-  },
-  {
-    _id: "68f909f5619618597434a3fa",
-    name: "C++afaeAVALO",
-    players: ["Marcos", "Quirico VII"],
-    score: [0, 100, 200, 350],
-    domain: "bigriver",
-    challenges: [],
-    __v: 0,
-  },
-  {
-    _id: "68f909f5619618597434a3fa",
-    name: "C++AfaefVALO",
-    players: ["Marcos", "Quirico VII"],
-    score: [0, 100, 200, 350],
-    domain: "bigriver",
-    challenges: [],
-    __v: 0,
-  },
-  {
-    _id: "68f909f5619618597434a3fa",
-    name: "C++AfaefVALO",
-    players: ["Marcos", "Quirico VII"],
-    score: [0, 100, 200, 350],
-    domain: "bigriver",
-    challenges: [],
-    __v: 0,
-  },
-  {
-    _id: "68f909f5619618597434a3fa",
-    name: "C++AfaefVALO",
-    players: ["Marcos", "Quirico VII"],
-    score: [0, 100, 200, 350],
-    domain: "bigriver",
-    challenges: [],
-    __v: 0,
-  },
-  {
-    _id: "68f909f5619618597434a3fa",
-    name: "C++AfaefVALO",
-    players: ["Marcos", "Quirico VII"],
-    score: [0, 100, 200, 350],
-    domain: "bigriver",
-    challenges: [],
-    __v: 0,
-  },
-];
+interface TeamType {
+  name: string;
+  players: string[];
+  score: number[];
+  domain: {
+    type: string;
+    required: boolean;
+    unique: boolean;
+  };
+  challenges: number[];
+}
+
+interface TeamsDataType {
+  data: TeamType[];
+}
+
+const teamsData = reactive<TeamsDataType>({
+  data: [],
+});
+
+onMounted(() => {
+  $socket.on("teams:update", (data) => {
+    teamsData.data = data;
+  });
+});
 
 const generateTeamColor = (index: number) => {
   const colors = [
@@ -158,7 +81,7 @@ const getTotalScore = (team: any) => {
   return team.score.reduce((acc, cur) => {
     acc += cur;
     return acc;
-  });
+  }, 0);
 };
 
 const getRunningScores = (team: any) => {
@@ -170,13 +93,13 @@ const getRunningScores = (team: any) => {
 };
 
 const sortedTeams = computed(() => {
-  return [...teams].sort((a, b) => getTotalScore(b) - getTotalScore(a));
+  return [...teamsData.data].sort((a, b) => getTotalScore(b) - getTotalScore(a));
 });
 
 const labels = computed(() => Array.from({ length: 10 }, (_, i) => (i * 100).toString()));
 
 const datasets = computed(() => {
-  return teams.map((team, index) => {
+  return teamsData.data.map((team, index) => {
     return {
       label: team.name,
       data: getRunningScores(team),

@@ -1,9 +1,8 @@
 <template>
-  <div class="bg-slate-200 h-screen p-5">
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=lightbulb_2" />
-
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=lightbulb_2" />
+  <div class="bg-slate-200 min-h-screen p-5">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

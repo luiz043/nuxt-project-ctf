@@ -1,65 +1,24 @@
 <template>
-  <div class="grid grid-cols-5 gap-2">
-    <!-- <ButtonCard class="col-span-5 mb-15">
-      <slot> <h1>Dicas</h1></slot>
-    </ButtonCard> -->
-    <div class="col-span-5 flex flex-col">
-      <CyanBanner><template #default> PONTOS DE EVENTO </template></CyanBanner>
-      <NormalCard class="mt-5 flex flex-wrap items-center justify-around">
-        <template #content>
-          <div>
-            <div
-              class="flex p-2 border-2 2xl:w-7xl sm:w-4xl mt-3 text-white bg-black justify-between items-center">
-              <div class="text-4xl">
-                First Blood Points
-                <span class="animate-code">_</span>
-              </div>
-
-              <span class="text-4xl"> +100 Pontos</span>
-            </div>
-            <div class="text-2xl text-gray-600">
-              Ganha ao ser a primeira equipe a finalizar um desafio avançado
-            </div>
-          </div>
-          <div>
-            <div class="flex border-2 sm:w-4xl 2xl:w-7xl p-2 mt-3 justify-between items-center">
-              <span class="text-4xl"> Start Points </span>
-              <span class="text-4xl"> +50 Pontos</span>
-            </div>
-            <div class="text-2xl text-gray-600">
-              Ganha ao ser a primeira equipe a finalizar um desafio geral
-            </div>
-          </div>
-        </template>
-      </NormalCard>
-    </div>
-    <PurpleBanner class="m-1 mt-5">
-      <template #default> DESAFIOS </template>
-    </PurpleBanner>
-    <div class="col-span-5">
-      <div class="grid grid-cols-3 gap-2">
-        <ChallengeCards :data="challenges"> </ChallengeCards>
+  <CyanBanner>
+    <template #default> PONTOS POR EQUIPE </template>
+  </CyanBanner>
+  <NormalCard class="mt-3">
+    <template #content>
+      <div class="flex justify-between items-center">
+        <div>
+          <div class="text-4xl">Teafve</div>
+          <div class="text-2xl text-gray-500">blaa,faefa,baef</div>
+        </div>
+        <div class="text-4xl">506 Pontos</div>
       </div>
-    </div>
+    </template>
+  </NormalCard>
+  <PurpleBanner class="mt-5"><template #default> DESAFIOS </template></PurpleBanner>
+  <div class="grid grid-cols-3 gap-2 mt-5">
+    <ChallengeCards :data="challenges"></ChallengeCards>
   </div>
 </template>
-
-<script setup lang="ts">
-// const { $socket } = useNuxtApp();
-
-// const useX = reactive({
-//   data: {},
-// });
-
-// onMounted(() => {
-//   $socket.on("message", (data) => {
-//     console.log("📩 Mensagem recebida:", data);
-//     useX.data = data;
-//   });
-
-//   $socket.emit("join-room", { roomId: "16" });
-// });
-
+<script setup>
 const challenges = reactive([
   {
     "clue": {
