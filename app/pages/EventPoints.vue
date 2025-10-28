@@ -36,41 +36,237 @@
     <div class="cyber-banner cyber-glitch-1 w-full bg-purple mt-5 fg-white col-span-5">
       DESAFIOS
     </div>
-    <Card
-      v-for="(teams, index) in challenges"
-      class="col-span-5 w-full">
-      <template #content>
-        <div class="flex text-3xl justify-between">
-          <span>
-            {{ index }} >
-            {{ teams.name }}
-          </span>
-          <span class="text-4xl"
-            >{{ teams.score_base }}
-            <span class="text-gray-600 text-3xl">pontos</span>
-          </span>
-        </div>
-      </template>
-    </Card>
+    <div class="col-span-5">
+      <div class="grid grid-cols-3 gap-2">
+        <Card
+          v-for="(challenge, index) in challenges"
+          class="w-full">
+          <template #content>
+            <div class="col-span-1 text-3xl items-center justify-between">
+              <span>
+                {{ index }} >
+                {{ challenge.name }}
+                <span>
+                  {{ index }} > {{ challenge.name }}
+
+                  <!-- Mostra scramble-text se description ainda não existir -->
+                  <div
+                    class="mt-2"
+                    v-if="!challenge.clue?.description">
+                    <span class="text-2xl text-gray-600">Dica: </span>
+                    <span class="scramble-text text-green-400 w-full bg-black text-2xl font-mono">
+                      {{ scrambledTexts[index] }}
+                    </span>
+                  </div>
+
+                  <div
+                    class="mt-2"
+                    v-else>
+                    <div class="text-2xl text-gray-600">Dica:</div>
+                    <span class="text-green-400 scramble-text w-full bg-black text-2xl font-mono">
+                      {{ challenge.clue.description }}
+                    </span>
+                  </div>
+                </span>
+              </span>
+            </div>
+          </template>
+        </Card>
+      </div>
+    </div>
   </div>
 </template>
-<script setup>
-const challenges = [
+
+<script setup lang="ts">
+// const { $socket } = useNuxtApp();
+
+// const useX = reactive({
+//   data: {},
+// });
+
+// onMounted(() => {
+//   $socket.on("message", (data) => {
+//     console.log("📩 Mensagem recebida:", data);
+//     useX.data = data;
+//   });
+
+//   $socket.emit("join-room", { roomId: "16" });
+// });
+
+const challenges = reactive([
   {
-    advanced: false,
-    _id: "68f91a2959176fb01488a6a0",
-    name: "Password no HTML",
-    score_base: 15,
-    code: 1,
-    __v: 0,
+    "clue": {
+      "description": "Sei lá cardth dth",
+      "degradationRate": 0.2,
+      "releaseDate": "2025-10-27T19:03:05.644Z",
+    },
+    "_id": "68ffc1b44d4bea2996f2f408",
+    "name": "Qualquer coisa",
+    "code": 1,
+    "category": "easy",
+    "firstBlood": true,
+    "taskDone": false,
+    "__v": 0,
+    "secret": false,
   },
   {
-    _id: "68f928492ac95c950dd625aa",
-    name: "Desativar disable",
-    score_base: 40,
-    code: 2,
-    advanced: true,
-    __v: 0,
+    "clue": {
+      "description": "Sei lá cara, pensa",
+      "degradationRate": 0.2,
+      "releaseDate": "2025-10-27T19:03:05.644Z",
+    },
+    "_id": "68ffc1b44d4bea2996f2f408",
+    "name": "Qualquer coisa",
+    "code": 1,
+    "category": "easy",
+    "firstBlood": true,
+    "taskDone": false,
+    "__v": 0,
+    "secret": false,
   },
-];
+  {
+    "clue": {
+      "description": "Sei lá cara, pensa",
+      "degradationRate": 0.2,
+      "releaseDate": "2025-10-27T19:03:05.644Z",
+    },
+    "_id": "68ffc1b44d4bea2996f2f408",
+    "name": "Qualquer coisa",
+    "code": 1,
+    "category": "easy",
+    "firstBlood": true,
+    "taskDone": false,
+    "__v": 0,
+    "secret": false,
+  },
+  {
+    "clue": {
+      "description": "Sei lá cara, pensa",
+      "degradationRate": 0.2,
+      "releaseDate": "2025-10-27T19:03:05.644Z",
+    },
+    "_id": "68ffc1b44d4bea2996f2f408",
+    "name": "Qualquer coisa",
+    "code": 1,
+    "category": "easy",
+    "firstBlood": true,
+    "taskDone": false,
+    "__v": 0,
+    "secret": false,
+  },
+  {
+    "clue": {
+      "description": null,
+      "degradationRate": 0.3,
+    },
+    "_id": "68ffc1cd4d4bea2996f2f40c",
+    "name": "Senha no HTML",
+    "code": 2,
+    "category": "easy",
+    "firstBlood": false,
+    "taskDone": false,
+    "__v": 0,
+    "secret": false,
+  },
+  {
+    "clue": {
+      "description": null,
+      "degradationRate": 0.3,
+    },
+    "_id": "68ffc1cd4d4bea2996f2f40c",
+    "name": "Senha no HTML",
+    "code": 2,
+    "category": "easy",
+    "firstBlood": false,
+    "taskDone": false,
+    "__v": 0,
+    "secret": false,
+  },
+]);
+
+const scrambledTexts = ref<string[]>([]);
+
+// Caracteres para embaralhar
+const chars =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~`";
+
+// Função para embaralhar um texto
+const scrambleText = (text: string) => {
+  return text
+    .split("")
+    .map(() => chars[Math.floor(Math.random() * chars.length)])
+    .join("");
+};
+
+// Inicializa os textos embaralhados apenas para desafios sem descrição
+const initScrambledTexts = () => {
+  scrambledTexts.value = challenges.map(
+    (challenge) =>
+      challenge.clue.description == null ?
+        scrambleText("****************************") // Pode usar um placeholder
+      : "" // vazio para desafios já liberados
+  );
+};
+
+let interval: NodeJS.Timeout;
+
+onMounted(() => {
+  // Inicializa os textos
+  initScrambledTexts();
+
+  // Atualiza os textos a cada 180ms apenas para desafios sem descrição
+  interval = setInterval(() => {
+    scrambledTexts.value = challenges.map((challenge) =>
+      challenge.clue.description == null ? scrambleText("*****************************") : ""
+    );
+  }, 200);
+});
 </script>
+<style>
+.scramble-text {
+  display: inline-block;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 0 rgba(0, 255, 0, 0.7);
+}
+
+@keyframes glitch-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1px, 1px);
+    text-shadow:
+      -2px 0 rgba(255, 0, 0, 0.7),
+      2px 0 rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    transform: translate(1px, -1px);
+    text-shadow:
+      1px 0 rgba(255, 0, 0, 0.5),
+      -1px 0 rgba(0, 255, 0, 0.5);
+  }
+  75% {
+    transform: translate(-1px, -1px);
+    text-shadow:
+      -1px 0 rgba(255, 0, 0, 0.8),
+      1px 0 rgba(0, 255, 0, 0.8);
+  }
+}
+
+/* Animação do cursor piscando */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-code {
+  animation: blink 1s infinite;
+}
+</style>

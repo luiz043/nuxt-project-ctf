@@ -1,23 +1,8 @@
 <template>
-  <div class="bg-slate-200 h-dvh p-5">
-    <!-- <nav
-      class="flex justify-evenly neon-border-rotate rounded-bl-2xl rounded-tr-2xl bg-red-50 opacity-90 pb-4 gap-5 mb-5">
-      <NuxtLink
-        to="/leaderboard"
-        class="cyber-button cyber-glitch-2 bg-purple text-white">
-        Pontuação
-        <span class="glitchtext">hacker</span>
-        <span class="tag">R25</span>
-      </NuxtLink>
-
-      <NuxtLink
-        to="/eventpoints"
-        class="cyber-button cyber-glitch-4 bg-red text-white">
-        PONTOS DE EVENTO
-        <span class="glitchtext">Clica ai</span>
-        <span class="tag">R26</span>
-      </NuxtLink>
-    </nav> -->
+  <div class="bg-slate-200 h-screen p-5">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=lightbulb_2" />
 
     <NuxtLayout>
       <NuxtPage />
