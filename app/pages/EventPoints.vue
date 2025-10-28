@@ -37,117 +37,31 @@
       <template #default> DESAFIOS </template>
     </PurpleBanner>
     <div class="col-span-5">
-      <div class="grid grid-cols-3 gap-2">
-        <ChallengeCards :data="challenges"> </ChallengeCards>
+      <div class="grid grid-cols-3 gap-3">
+        <ChallengeCards :data="ChallengesData.data"> </ChallengeCards>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// const { $socket } = useNuxtApp();
+import { io } from "socket.io-client";
 
-// const useX = reactive({
-//   data: {},
-// });
+const ChallengesData = reactive({
+  data: [],
+});
 
-// onMounted(() => {
-//   $socket.on("message", (data) => {
-//     console.log("📩 Mensagem recebida:", data);
-//     useX.data = data;
-//   });
+const socket = io("ws://10.10.10.23:3030", {
+  transports: ["websocket"],
+});
 
-//   $socket.emit("join-room", { roomId: "16" });
-// });
+socket.on("connect", () => {
+  socket.emit("subscribe", "challenges");
+});
 
-const challenges = reactive([
-  {
-    "clue": {
-      "description": "Sei lá cardth dth",
-      "degradationRate": 0.2,
-      "releaseDate": "2025-10-27T19:03:05.644Z",
-    },
-    "_id": "68ffc1b44d4bea2996f2f408",
-    "name": "Qualquer coisa",
-    "code": 1,
-    "category": "easy",
-    "firstBlood": true,
-    "taskDone": false,
-    "__v": 0,
-    "secret": false,
-  },
-  {
-    "clue": {
-      "description": "Sei lá cara, pensa",
-      "degradationRate": 0.2,
-      "releaseDate": "2025-10-27T19:03:05.644Z",
-    },
-    "_id": "68ffc1b44d4bea2996f2f408",
-    "name": "Qualquer coisa",
-    "code": 1,
-    "category": "easy",
-    "firstBlood": true,
-    "taskDone": true,
-    "__v": 0,
-    "secret": false,
-  },
-  {
-    "clue": {
-      "description": "Sei lá cara, pensa",
-      "degradationRate": 0.2,
-      "releaseDate": "2025-10-27T19:03:05.644Z",
-    },
-    "_id": "68ffc1b44d4bea2996f2f408",
-    "name": "Qualquer coisa",
-    "code": 1,
-    "category": "easy",
-    "firstBlood": true,
-    "taskDone": false,
-    "__v": 0,
-    "secret": false,
-  },
-  {
-    "clue": {
-      "description": "Sei lá cara, pensa",
-      "degradationRate": 0.2,
-      "releaseDate": "2025-10-27T19:03:05.644Z",
-    },
-    "_id": "68ffc1b44d4bea2996f2f408",
-    "name": "Qualquer coisa",
-    "code": 1,
-    "category": "easy",
-    "firstBlood": true,
-    "taskDone": true,
-    "__v": 0,
-    "secret": false,
-  },
-  {
-    "clue": {
-      "description": null,
-      "degradationRate": 0.3,
-    },
-    "_id": "68ffc1cd4d4bea2996f2f40c",
-    "name": "Senha no HTML",
-    "code": 2,
-    "category": "easy",
-    "firstBlood": false,
-    "taskDone": false,
-    "__v": 0,
-    "secret": false,
-  },
-  {
-    "clue": {
-      "description": null,
-      "degradationRate": 0.3,
-    },
-    "_id": "68ffc1cd4d4bea2996f2f40c",
-    "name": "Senha no HTML",
-    "code": 2,
-    "category": "easy",
-    "firstBlood": false,
-    "taskDone": false,
-    "__v": 0,
-    "secret": false,
-  },
-]);
+onMounted(() => {
+  socket.on("challenges:update", (data) => {
+    ChallengesData.data = data;
+  });
+});
 </script>

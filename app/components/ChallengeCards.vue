@@ -7,13 +7,16 @@
         <span>
           <span>
             <span :class="challenge.taskDone ? 'line-through' : ''">
-              {{ index }} > {{ challenge.name }}
+              {{ index }} > {{ challenge.title }}
             </span>
+            <div class="text-xl text-gray-500">
+              {{ challenge.description }}
+            </div>
 
             <!-- Mostra scramble-text se description ainda não existir -->
             <div
               class="mt-2"
-              v-if="!challenge.clue?.description">
+              v-if="!challenge?.clue?.description">
               <span class="text-2xl text-gray-600">Dica: </span>
               <span class="scramble-text text-green-400 w-full bg-black text-2xl font-mono">
                 {{ scrambledTexts[index] }}
@@ -25,7 +28,7 @@
               v-else>
               <div class="text-2xl text-gray-600">Dica:</div>
               <span class="text-green-400 scramble-text w-full bg-black text-2xl font-mono">
-                {{ challenge.clue.description }}
+                {{ challenge?.clue?.description }}
               </span>
             </div>
           </span>
@@ -42,7 +45,8 @@ interface Challenges {
     releaseDate: string;
   };
   _id: string;
-  name: string;
+  title: string;
+  description: string;
   code: number;
   category: string;
   firstBlood: boolean;
@@ -87,7 +91,7 @@ onMounted(() => {
   // Atualiza os textos a cada 180ms apenas para desafios sem descrição
   interval = setInterval(() => {
     scrambledTexts.value = props.data.map((challenge) =>
-      challenge.clue.description == null ? scrambleText("*****************************") : ""
+      challenge?.clue?.description == null ? scrambleText("*****************************") : ""
     );
   }, 150);
 });
