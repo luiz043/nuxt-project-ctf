@@ -24,10 +24,10 @@
           <div>
             <div class="flex border-2 sm:w-4xl 2xl:w-7xl p-2 mt-3 justify-between items-center">
               <span class="text-4xl"> Extra Points </span>
-              <span class="text-4xl"> +50 Pontos</span>
+              <span class="text-4xl"> +300 Pontos</span>
             </div>
             <div class="text-2xl text-gray-600">
-              Ganha ao ser a primeira equipe a finalizar um desafio EXTRA
+              Ganha ao ser a primeira equipe a finalizar o desafio EXTRA
             </div>
           </div>
         </template>

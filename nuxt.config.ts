@@ -13,7 +13,13 @@ export default defineNuxtConfig({
       name: 'slide',
       mode: 'out-in', // default
     },
+    head: {
+      htmlAttrs: {
+        lang: 'pt-BR'
+      },
+    },
   },
+
 
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },

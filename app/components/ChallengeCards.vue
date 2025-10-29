@@ -4,7 +4,7 @@
     :key="challenge._id"
     class="w-full h-full">
     <template #content>
-      <div class="flex flex-col min-h-[200px] h-full">
+      <div class="flex flex-col relative min-h-[200px] h-full">
         <div class="flex-1">
           <div class="text-3xl">
             <span
@@ -12,20 +12,34 @@
               class="truncate block">
               {{ scrambledTexts[index] }}
             </span>
-            <span v-else> {{ index + 1 }} &gt; {{ challenge.description }} </span>
+            <span
+              v-else
+              class="hyphens-auto word-break-word">
+              {{ index + 1 }} &gt; {{ challenge.title }}
+
+              <div class="text-xl text-gray-500">
+                {{ challenge.description }}
+              </div>
+            </span>
           </div>
         </div>
 
         <div class="mt-auto pt-4 border-t border-gray-300">
           <div
             v-if="!challenge?.clue?.description"
-            class="flex flex-col gap-1">
+            class="flex flex-col justify-center gap-1">
             <span class="text-xl text-gray-600">Dica:</span>
-            <div class="overflow-hidden">
+            <div class="overflow-hidden flex">
               <span
-                class="scramble-text text-green-400 bg-black px-2 py-1 text-xl font-mono block truncate">
+                class="scramble-text text-green-400 bg-black py-3 me-1 px-2 text-xl font-mono block truncate">
                 {{ scrambledTexts[index] }}
               </span>
+              <Button
+                v-if="challenge.category != 'first-blood' && index != 19"
+                icon="pi pi-eye"
+                rounded
+                class="ml-auto"
+                @click="showHint(index + 1)" />
             </div>
           </div>
 
@@ -45,7 +59,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+const { $socket } = useNuxtApp();
+
+const showHint = (index: number) => {
+  $socket.emit("challenge:hint", index);
+};
 
 interface Challenges {
   clue: {
@@ -58,7 +76,6 @@ interface Challenges {
   description: string;
   code: number;
   category: string;
-  firstBlood: boolean;
   taskDone: boolean;
   secret: boolean;
 }
