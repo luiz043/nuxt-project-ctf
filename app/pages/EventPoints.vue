@@ -18,7 +18,7 @@
               <span class="text-4xl"> +100 Pontos</span>
             </div>
             <div class="text-2xl text-gray-600">
-              Ganha ao ser a primeira equipe a finalizar um desafio
+              Ganha ao ser a primeira equipe a finalizar um desafio em cada categoria diferente
             </div>
           </div>
           <div>

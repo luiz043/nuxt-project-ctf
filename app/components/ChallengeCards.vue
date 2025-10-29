@@ -6,9 +6,7 @@
     <template #content>
       <div class="flex flex-col min-h-[200px] h-full">
         <div class="flex-1">
-          <div
-            class="text-3xl"
-            :class="challenge.taskDone ? 'line-through' : ''">
+          <div class="text-3xl">
             <span
               v-if="index == 19"
               class="truncate block">

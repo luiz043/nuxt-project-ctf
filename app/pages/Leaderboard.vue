@@ -11,7 +11,7 @@
     <div class="col-span-3">
       <div class="grid grid-cols-3 gap-3">
         <Card
-          v-for="(team, index) in teamsData.data"
+          v-for="(team, index) in sortedTeams"
           class="col-span-1 w-full">
           <template #content>
             <div class="flex text-3xl justify-between">

@@ -2,33 +2,13 @@
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=lightbulb_2" />
-  <div class="bg-slate-200 min-h-screen p-5">
+  <div class="bg-slate-200 min-h-screen overflow-x-hidden p-5">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
 <style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-
-.layout-enter-active,
-.layout-leave-active {
-  transition: all 0.4s;
-}
-.layout-enter-from,
-.layout-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-
 /* ===== BORDAS NEON COM SOMBRA ===== */
 
 /* Opção 1: Cyan/Blue - Fresco e Tecnológico */
