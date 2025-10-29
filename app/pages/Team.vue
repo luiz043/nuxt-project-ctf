@@ -7,7 +7,7 @@
       <div class="flex justify-between items-center">
         <div>
           <div class="text-4xl">Teafve</div>
-          <div class="text-2xl text-gray-500">blaa,faefa,baef</div>
+          <div class="text-2xl text-gray-500">blaa, faefa, baef</div>
         </div>
         <div class="text-4xl">506 Pontos</div>
       </div>

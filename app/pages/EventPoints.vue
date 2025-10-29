@@ -18,16 +18,16 @@
               <span class="text-4xl"> +100 Pontos</span>
             </div>
             <div class="text-2xl text-gray-600">
-              Ganha ao ser a primeira equipe a finalizar um desafio avançado
+              Ganha ao ser a primeira equipe a finalizar um desafio
             </div>
           </div>
           <div>
             <div class="flex border-2 sm:w-4xl 2xl:w-7xl p-2 mt-3 justify-between items-center">
-              <span class="text-4xl"> Start Points </span>
+              <span class="text-4xl"> Extra Points </span>
               <span class="text-4xl"> +50 Pontos</span>
             </div>
             <div class="text-2xl text-gray-600">
-              Ganha ao ser a primeira equipe a finalizar um desafio geral
+              Ganha ao ser a primeira equipe a finalizar um desafio EXTRA
             </div>
           </div>
         </template>
